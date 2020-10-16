@@ -62,7 +62,7 @@ namespace Keepr.Controllers
         Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
         if ((user == null) || (user.Value != res.UserId) || res == null)
         {
-          throw new Exception("You do not have access to this sentence.");
+          throw new Exception("You do not have access to this word.");
         }
         return Ok(_ws.GetById(id));
       }
@@ -109,6 +109,19 @@ namespace Keepr.Controllers
       }
     }
 
+    /*[HttpDelete]
+        public ActionResult<string> Delete()
+        {
+          try
+          {
+            return Ok(_ws.Delete());
+          }
+          catch (System.Exception err)
+          {
+            return BadRequest(err.Message);
+          }
+        }*/
+
     [Authorize]
     [HttpDelete("{id}")]
     public ActionResult<string> Delete(int id)
@@ -127,19 +140,6 @@ namespace Keepr.Controllers
         return BadRequest(err.Message);
       }
     }
-
-    /*[HttpDelete]
-    public ActionResult<string> Delete()
-    {
-      try
-      {
-        return Ok(_ws.Delete());
-      }
-      catch (System.Exception err)
-      {
-        return BadRequest(err.Message);
-      }
-    }*/
 
   }
 }

@@ -39,6 +39,12 @@ namespace Keepr.Services
       return _repo.Create(newWord);
     }
 
+    /*public string Delete()
+        {
+          bool deleted = _repo.Delete();
+          return "All deleted!";
+        }*/
+
     public string Delete(string userId, int id)
     {
       GetById(id);
@@ -50,18 +56,13 @@ namespace Keepr.Services
       return "Deleted!";
     }
 
-    /*public string Delete()
-    {
-      bool deleted = _repo.Delete();
-      return "All deleted!";
-    }*/
-
     public Word Update(Word updatedWord)
     {
       Word foundWord = GetById(updatedWord.Id);
       updatedWord.Id = foundWord.Id;
       updatedWord.UserId = foundWord.UserId;
       updatedWord.Name = updatedWord.Name == null ? foundWord.Name : updatedWord.Name;
+      updatedWord.Definition = updatedWord.Definition == null ? foundWord.Definition : updatedWord.Definition;
       updatedWord.Img = updatedWord.Img == null ? foundWord.Img : updatedWord.Img;
       bool updated = _repo.Update(updatedWord);
       if (!updated)

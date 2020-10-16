@@ -65,6 +65,8 @@ namespace Keepr
       services.AddTransient<WordsRepository>();
       services.AddTransient<SentencesService>();
       services.AddTransient<SentencesRepository>();
+      services.AddTransient<SentenceWordsService>();
+      services.AddTransient<SentenceWordsRepository>();
     }
 
     private IDbConnection CreateDbConnection()

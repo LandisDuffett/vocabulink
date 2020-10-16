@@ -18,24 +18,24 @@ CREATE TABLE IF NOT EXISTS words (
     PRIMARY KEY (id)
 );
 
--- CREATE TABLE vaultkeeps (
---     id int NOT NULL AUTO_INCREMENT,
---     vaultId int NOT NULL,
---     keepId int NOT NULL,
---     userId VARCHAR(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS sentencewords (
+    id int NOT NULL AUTO_INCREMENT,
+    sentenceId int NOT NULL,
+    wordId int NOT NULL,
+    userId VARCHAR(255) NOT NULL,
 
---     PRIMARY KEY (id),
---     INDEX (vaultId, keepId),
---     INDEX (userId),
+    PRIMARY KEY (id),
+    INDEX (sentenceId, wordId),
+    INDEX (userId),
 
---     FOREIGN KEY (vaultId)
---         REFERENCES vaults(id)
---         ON DELETE CASCADE,
+    FOREIGN KEY (sentenceId)
+        REFERENCES sentences(id)
+        ON DELETE CASCADE,
 
---     FOREIGN KEY (keepId)
---         REFERENCES keeps(id)
---         ON DELETE CASCADE
--- )
+    FOREIGN KEY (wordId)
+        REFERENCES words(id)
+        ON DELETE CASCADE
+);
 
 
 -- -- USE THIS LINE FOR GET KEEPS BY VAULTID

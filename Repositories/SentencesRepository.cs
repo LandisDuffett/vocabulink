@@ -15,6 +15,24 @@ namespace Keepr.Repositories
       _db = db;
     }
 
+    /*internal IEnumerable<Sentence> Get()
+    {
+      string sql = "SELECT * FROM sentences;";
+      return _db.Query<Sentence>(sql);
+    }*/
+
+    internal IEnumerable<Sentence> GetMySentences(string userId)
+    {
+      string sql = "SELECT * FROM sentences WHERE userId = @userId;";
+      return _db.Query<Sentence>(sql, new { userId });
+    }
+
+    internal Sentence GetById(int id)
+    {
+      string sql = "SELECT * FROM sentences WHERE id = @Id;";
+      return _db.QueryFirstOrDefault<Sentence>(sql, new { id });
+    }
+
     internal Sentence Create(Sentence newSentence)
     {
       string sql = @"INSERT INTO sentences
@@ -26,5 +44,25 @@ namespace Keepr.Repositories
       return newSentence;
     }
 
+    public bool Update(Sentence updatedSentence)
+    {
+      string sql = @"UPDATE sentences SET text = @text WHERE id = @id AND userId = @userId LIMIT 1;";
+      int rowsAffected = _db.Execute(sql, updatedSentence);
+      return rowsAffected == 1;
+    }
+
+    /*public bool Delete()
+    {
+      string sql = "DELETE FROM sentences";
+      int rowsAffected = _db.Execute(sql);
+      return rowsAffected == 1;
+    }*/
+
+    public bool Delete(string userId, int id)
+    {
+      string sql = "DELETE FROM sentences WHERE id = @id AND userId = @userId LIMIT 1;";
+      int rowsAffected = _db.Execute(sql, new { userId, id });
+      return rowsAffected == 1;
+    }
   }
 }
