@@ -50,5 +50,19 @@ namespace Keepr.Repositories
       newWord.Id = _db.ExecuteScalar<int>(sql, newWord);
       return newWord;
     }
+
+    /*public bool Delete()
+    {
+      string sql = "DELETE FROM words";
+      int rowsAffected = _db.Execute(sql);
+      return rowsAffected == 1;
+    }*/
+
+    public bool Delete(string userId, int id)
+    {
+      string sql = "DELETE FROM words WHERE id = @id AND userId = @userId LIMIT 1;";
+      int rowsAffected = _db.Execute(sql, new { userId, id });
+      return rowsAffected == 1;
+    }
   }
 }

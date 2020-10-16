@@ -108,5 +108,38 @@ namespace Keepr.Controllers
         return BadRequest(err.Message);
       }
     }
+
+    [Authorize]
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(int id)
+    {
+      try
+      {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("You must be logged in to delete any words.");
+        }
+        return Ok(_ws.Delete(user.Value, id));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+
+    /*[HttpDelete]
+    public ActionResult<string> Delete()
+    {
+      try
+      {
+        return Ok(_ws.Delete());
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }*/
+
   }
 }

@@ -39,6 +39,23 @@ namespace Keepr.Services
       return _repo.Create(newWord);
     }
 
+    public string Delete(string userId, int id)
+    {
+      GetById(id);
+      bool deleted = _repo.Delete(userId, id);
+      if (!deleted)
+      {
+        throw new Exception("You are not the owner of this word.");
+      }
+      return "Deleted!";
+    }
+
+    /*public string Delete()
+    {
+      bool deleted = _repo.Delete();
+      return "All deleted!";
+    }*/
+
     public Word Update(Word updatedWord)
     {
       Word foundWord = GetById(updatedWord.Id);
