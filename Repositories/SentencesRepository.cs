@@ -64,5 +64,16 @@ namespace Keepr.Repositories
       int rowsAffected = _db.Execute(sql, new { userId, id });
       return rowsAffected == 1;
     }
+    internal IEnumerable<SentenceWordSentenceViewModel> GetSentencesByWordId(int wordId, string userId)
+    {
+      string sql = @"
+        SELECT 
+        s.*,
+        sw.id as sentencewordId
+        FROM sentencewords sw
+        INNER JOIN sentences s ON s.id = sw.sentenceId 
+        WHERE(wordId = @wordId AND sw.userId = @userId);";
+      return _db.Query<SentenceWordSentenceViewModel>(sql, new { wordId, userId });
+    }
   }
 }

@@ -69,5 +69,10 @@ namespace Keepr.Services
       }
       return "Deleted!";
     }
+
+    internal IEnumerable<SentenceWordSentenceViewModel> GetSentencesByWordId(int sentenceId, string userId)
+    {
+      return _repo.GetSentencesByWordId(sentenceId, userId);
+    }
   }
 }

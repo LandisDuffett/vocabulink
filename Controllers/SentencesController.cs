@@ -16,9 +16,11 @@ namespace Keepr.Controllers
   public class SentencesController : ControllerBase
   {
     private readonly SentencesService _ss;
-    public SentencesController(SentencesService ss)
+    private readonly WordsService _ws;
+    public SentencesController(SentencesService ss, WordsService ws)
     {
       _ss = ss;
+      _ws = ws;
     }
 
     /*[HttpGet]
@@ -142,5 +144,19 @@ namespace Keepr.Controllers
       }
     }
 
+
+    [HttpGet("{sentenceId}/words")]
+    public ActionResult<SentenceWordWordViewModel> GetWordsBySentenceId(int sentenceId)
+    {
+      try
+      {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_ws.GetWordsBySentenceId(sentenceId, userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
   }
 }

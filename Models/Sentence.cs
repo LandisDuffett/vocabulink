@@ -7,4 +7,9 @@ namespace Keepr.Models
     public string Text { get; set; }
 
   }
+
+  public class SentenceWordSentenceViewModel : Sentence
+  {
+    public int SentenceWordId { get; set; }
+  }
 }

@@ -9,8 +9,10 @@ namespace Keepr.Models
     public string Img { get; set; }
 
   }
-  /*public class SentenceWordViewModel : Word
+
+  public class SentenceWordWordViewModel : Word
   {
     public int SentenceWordId { get; set; }
-  }*/
+  }
+
 }

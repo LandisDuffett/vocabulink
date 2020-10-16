@@ -71,5 +71,10 @@ namespace Keepr.Services
       }
       return updatedWord;
     }
+
+    internal IEnumerable<SentenceWordWordViewModel> GetWordsBySentenceId(int wordId, string userId)
+    {
+      return _repo.GetWordsBySentenceId(wordId, userId);
+    }
   }
 }

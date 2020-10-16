@@ -16,9 +16,11 @@ namespace Keepr.Controllers
   public class WordsController : ControllerBase
   {
     private readonly WordsService _ws;
-    public WordsController(WordsService ws)
+    private readonly SentencesService _ss;
+    public WordsController(WordsService ws, SentencesService ss)
     {
       _ws = ws;
+      _ss = ss;
     }
     /*[HttpGet]
     public ActionResult<IEnumerable<Word>> Get()
@@ -138,6 +140,20 @@ namespace Keepr.Controllers
       catch (System.Exception err)
       {
         return BadRequest(err.Message);
+      }
+    }
+
+    [HttpGet("{wordId}/sentences")]
+    public ActionResult<SentenceWordSentenceViewModel> GetSentencesByWordId(int wordId)
+    {
+      try
+      {
+        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_ss.GetSentencesByWordId(wordId, userId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
       }
     }
 
