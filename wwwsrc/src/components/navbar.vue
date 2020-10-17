@@ -1,6 +1,20 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'home' }">Keepr</router-link>
+  <nav class="navbar navbar-expand-lg navbar-light bg-danger">
+    <router-link class="navbar-brand" :to="{ name: 'home' }"
+      ><span><b>VOCAB</b></span
+      ><img
+        class="picborder rounded mb-1"
+        src="../assets/link.png"
+        alt
+        style="max-width: 1rem"
+      /><b>U</b
+      ><img
+        class="picborder rounded mb-1"
+        src="../assets/link.png"
+        alt
+        style="max-width: 1rem"
+      /><span><b>LINK</b></span></router-link
+    >
     <button
       class="navbar-toggler"
       type="button"
@@ -37,7 +51,7 @@
         >
           Login
         </button>
-        <button class="btn btn-danger" @click="logout" v-else>logout</button>
+        <button class="btn btn-dark" @click="logout" v-else>logout</button>
       </span>
     </div>
   </nav>
@@ -48,7 +62,7 @@ import axios from "axios";
 
 let _api = axios.create({
   baseURL: "https://localhost:5001",
-  withCredentials: true
+  withCredentials: true,
 });
 export default {
   name: "Navbar",
@@ -62,8 +76,8 @@ export default {
     async logout() {
       this.$store.dispatch("resetBearer");
       await this.$auth.logout({ returnTo: window.location.origin });
-    }
-  }
+    },
+  },
 };
 </script>
 

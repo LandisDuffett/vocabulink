@@ -71,7 +71,7 @@
         <input
           type="submit"
           value="add word"
-          class="mx-2 btn border btn-info rounded"
+          class="mx-2 btn border btn-danger rounded"
           style="max-height: 2rem"
         />
       </form>
@@ -80,7 +80,7 @@
       <button
         @click="addLink()"
         type="button"
-        class="row btn btn-xs border rounded btn-primary m-1 p-2"
+        class="row btn btn-xs border rounded btn-dark m-1 p-2"
       >
         create connection
       </button>
