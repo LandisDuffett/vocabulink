@@ -3,7 +3,7 @@ import Router from "vue-router";
 // @ts-ignore
 import Home from "./views/Home.vue";
 // @ts-ignore
-import Dashboard from "./views/Dashboard.vue";
+import Create from "./views/Create.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -16,9 +16,9 @@ export default new Router({
       component: Home
     },
     {
-      path: "/dashboard",
-      name: "dashboard",
-      component: Dashboard,
+      path: "/create",
+      name: "create",
+      component: Create,
       beforeEnter: authGuard
     }
   ]
