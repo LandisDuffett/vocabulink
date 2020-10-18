@@ -164,8 +164,8 @@ export default {
     logout() {
       this.$store.dispatch("logout");
     },
-    addWord() {
-      this.$store.dispatch("addWord", this.newWord);
+    async addWord() {
+      await this.$store.dispatch("addWord", this.newWord);
       this.newWord.name = "";
       this.newWord.definition = "";
       this.newWord.img = "";

@@ -6,10 +6,20 @@
       </div>
       <div class="row justify-content-center">
         <button
+          @click="returnWords()"
+          type="button"
+          style="max-height: 2rem; width: 20vw"
+          class="row btn border rounded btn-danger ml-3 m-1 p-2"
+          v-if="worditems[0] == null && beginWords == false"
+        >
+          Start
+        </button>
+        <button
           @click="nextSentence()"
           type="button"
           style="max-height: 2rem; width: 20vw"
           class="row btn border rounded btn-danger ml-3 m-1 p-2"
+          v-else
         >
           Next
         </button>
@@ -23,7 +33,9 @@
         </button>
       </div>
       <div class="row justify-content-center mt-2">
-        <h5 class="ml-4">"{{ sentences[sentenceindex].text }}"</h5>
+        <h5 class="ml-4" v-show="beginWords == true">
+          "{{ sentences[sentenceindex].text }}"
+        </h5>
       </div>
       <div class="row justify-content-center">
         <div
@@ -48,7 +60,10 @@
         </div>
       </div>
     </div>
-    <hr class="divider" />
+    <hr
+      v-show="worditems[0] != null && sentenceitems[0] != null"
+      class="divider"
+    />
     <!--begin sentences byword-->
     <div>
       <div class="row justify-content-center">
@@ -56,10 +71,20 @@
       </div>
       <div class="row justify-content-center">
         <button
+          @click="returnSentences()"
+          type="button"
+          style="max-height: 2rem; width: 20vw"
+          class="row btn border rounded btn-danger ml-3 m-1 p-2"
+          v-if="sentenceitems[0] == null && beginSentences == false"
+        >
+          Start
+        </button>
+        <button
           @click="nextWord()"
           type="button"
           style="max-height: 2rem; width: 20vw"
           class="row btn border rounded btn-danger ml-3 m-1 p-2"
+          v-else
         >
           Next
         </button>
@@ -73,7 +98,11 @@
         </button>
       </div>
       <div class="row justify-content-center">
-        <div class="card m-2 border rounded" style="width: 30vw">
+        <div
+          class="card m-2 border rounded"
+          style="width: 30vw"
+          v-show="beginSentences == true"
+        >
           <span class="ml-3 mt-2"
             ><span class="mr-2"><b>word:</b></span
             >{{ words[wordindex].name }}</span
@@ -114,7 +143,10 @@ export default {
     this.$store.dispatch("getSentencewords");
   },
   data() {
-    return {};
+    return {
+      beginWords: false,
+      beginSentences: false,
+    };
   },
   watch: {
     sentenceindex: function () {
@@ -156,9 +188,11 @@ export default {
         "getWordsBySentence",
         this.sentences[this.sentenceindex].id
       );
+      this.beginWords = true;
     },
     returnSentences() {
       this.$store.dispatch("getSentencesByWord", this.words[this.wordindex].id);
+      this.beginSentences = true;
     },
     nextSentence() {
       this.$store.dispatch("advance");
