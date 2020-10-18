@@ -101,8 +101,9 @@ namespace Keepr.Controllers
               }
             }*/
 
-    [Authorize]
+
     [HttpDelete("{id}")]
+    [Authorize]
     public ActionResult<string> Delete(int id)
     {
       try

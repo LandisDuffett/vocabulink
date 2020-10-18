@@ -19,7 +19,9 @@ export default new Vuex.Store({
   state: {
     sentences: [],
     words: [],
-    sentencewords: []
+    sentencewords: [],
+    wordsents: [],
+    sentwords: []
   },
   mutations: {
     setSentences(state, sentences) {
@@ -30,6 +32,12 @@ export default new Vuex.Store({
     },
     setSentencewords(state, sentencewords) {
       state.sentencewords = sentencewords
+    },
+    setWordsents(state, wordsents) {
+      state.wordsents = wordsents
+    },
+    setSentwords(state, sentwords) {
+      state.sentwords = sentwords
     }
   },
   actions: {
@@ -67,10 +75,28 @@ export default new Vuex.Store({
         })
     },
     addSentenceword({ dispatch }, data) {
-      api.post('sentenceword', data)
+      api.post('sentencewords', data)
         .then(server => {
           dispatch('getSentencewords')
         })
     },
+    async getSentencesByWord({ commit }, id) {
+      await api.get("words/" + id + "/sentences").then(res => {
+        commit('setWordsents', res.data)
+      })
+    },
+    async getWordsBySentence({ commit }, id) {
+      await api.get("sentences/" + id + "/words").then(res => {
+        commit('setSentwords', res.data)
+      })
+    },
+    async deleteSentenceword({ dispatch }, id) {
+      await api.delete("sentencewords/" + id).then(res => {
+        dispatch('getSentencewords')
+      })
+    },
+    async editSentence({ dispatch }, data) {
+      await api.put("sentences/" + data.id, data).then(res => dispatch('getSentences'))
+    }
   }
 });
