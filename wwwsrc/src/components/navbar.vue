@@ -33,6 +33,26 @@
             >Home</router-link
           >
         </li>
+        <li class="nav-item" :class="{ active: $route.name == 'create' }">
+          <router-link :to="{ name: 'create' }" class="nav-link"
+            >Create</router-link
+          >
+        </li>
+        <li class="nav-item" :class="{ active: $route.name == 'manage' }">
+          <router-link :to="{ name: 'manage' }" class="nav-link"
+            >Manage</router-link
+          >
+        </li>
+        <li class="nav-item" :class="{ active: $route.name == 'practice' }">
+          <router-link :to="{ name: 'practice' }" class="nav-link"
+            >Practice</router-link
+          >
+        </li>
+        <li class="nav-item" :class="{ active: $route.name == 'wordquiz' }">
+          <router-link :to="{ name: 'wordquiz' }" class="nav-link"
+            >Word quiz</router-link
+          >
+        </li>
       </ul>
       <span class="navbar-text">
         <button
