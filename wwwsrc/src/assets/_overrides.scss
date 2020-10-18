@@ -2,10 +2,14 @@
   font-size: .9rem;
 }
 
-.divider{
+.divider {
  margin-top:5px;
  margin-bottom:5px;
  height:1px;
  width:100%;
  border-top:1px solid gray;
+}
+
+.card {
+  border: solid black 1px;
 }
