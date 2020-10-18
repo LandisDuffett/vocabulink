@@ -5,6 +5,24 @@
         <h3 class="ml-4">View words by sentence</h3>
       </div>
       <div class="row justify-content-center">
+        <button
+          @click="nextSentence()"
+          type="button"
+          style="max-height: 2rem; width: 20vw"
+          class="row btn border rounded btn-danger ml-3 m-1 p-2"
+        >
+          Next
+        </button>
+        <button
+          @click="reset()"
+          type="button"
+          style="max-height: 2rem; width: 20vw"
+          class="row btn border rounded btn-dark ml-3 m-1 p-2"
+        >
+          Reset
+        </button>
+      </div>
+      <div class="row justify-content-center mt-2">
         <h5 class="ml-4">"{{ sentences[sentenceindex].text }}"</h5>
       </div>
       <div class="row justify-content-center">
@@ -29,24 +47,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row justify-content-center">
-      <button
-        @click="nextSentence()"
-        type="button"
-        style="max-height: 2rem; width: 20vw"
-        class="row btn border rounded btn-danger ml-3 m-1 p-2"
-      >
-        Next
-      </button>
-      <button
-        @click="nextSentence()"
-        type="button"
-        style="max-height: 2rem; width: 20vw"
-        class="row btn border rounded btn-dark ml-3 m-1 p-2"
-      >
-        Reset
-      </button>
     </div>
     <hr class="divider" />
     <div>
