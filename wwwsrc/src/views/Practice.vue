@@ -49,8 +49,58 @@
       </div>
     </div>
     <hr class="divider" />
+    <!--begin sentences byword-->
     <div>
-      <h3>View sentences by word</h3>
+      <div class="row justify-content-center">
+        <h3 class="ml-4">View sentences by word</h3>
+      </div>
+      <div class="row justify-content-center">
+        <button
+          @click="nextWord()"
+          type="button"
+          style="max-height: 2rem; width: 20vw"
+          class="row btn border rounded btn-danger ml-3 m-1 p-2"
+        >
+          Next
+        </button>
+        <button
+          @click="resetWords()"
+          type="button"
+          style="max-height: 2rem; width: 20vw"
+          class="row btn border rounded btn-dark ml-3 m-1 p-2"
+        >
+          Reset
+        </button>
+      </div>
+      <div class="row justify-content-center">
+        <div class="card m-2 border rounded" style="width: 30vw">
+          <span class="ml-3 mt-2"
+            ><span class="mr-2"><b>word:</b></span
+            >{{ words[wordindex].name }}</span
+          ><br />
+          <span class="ml-3"
+            ><span class="mr-2"><b>definition:</b></span
+            >{{ words[wordindex].definition }}</span
+          ><br />
+          <span class="ml-3"
+            ><img :src="words[wordindex].img" style="max-width: 8rem" /></span
+          ><br />
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div
+          v-for="sentenceitem in sentenceitems"
+          :sentenceitem="sentenceitem"
+          :key="sentenceitem.sentenceWordId"
+          :value="sentenceitem.id"
+        >
+          <div class="card m-2 border rounded" style="width: 30vw">
+            <span class="ml-3 mt-2"
+              ><span class="mr-2">"{{ sentenceitem.text }}"</span></span
+            >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -70,7 +120,7 @@ export default {
     sentenceindex: function () {
       this.returnWords();
     },
-    selectWord: function () {
+    wordindex: function () {
       this.returnSentences();
     },
   },
@@ -84,6 +134,9 @@ export default {
     sentences() {
       return this.$store.state.sentences;
     },
+    wordindex() {
+      return this.$store.state.wordindex;
+    },
     words() {
       return this.$store.state.words;
     },
@@ -92,9 +145,6 @@ export default {
     },
     worditems() {
       return this.$store.state.sentwords;
-    },
-    sentencewords() {
-      return this.$store.state.sentencewords;
     },
   },
   methods: {
@@ -108,13 +158,19 @@ export default {
       );
     },
     returnSentences() {
-      this.$store.dispatch("getSentencesByWord", this.selectWord);
+      this.$store.dispatch("getSentencesByWord", this.words[this.wordindex].id);
     },
     nextSentence() {
       this.$store.dispatch("advance");
     },
     reset() {
       this.$store.dispatch("reset");
+    },
+    nextWord() {
+      this.$store.dispatch("advanceWord");
+    },
+    resetWords() {
+      this.$store.dispatch("resetWord");
     },
   },
 };
