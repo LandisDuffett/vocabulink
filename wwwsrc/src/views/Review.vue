@@ -1,12 +1,12 @@
 <template>
   <div class="review">
-    <h2 class="ml-4">Sentences</h2>
+    <h2 class="ml-4">Words</h2>
     <div>
       <form>
-        <label for="activestudy" class="ml-4"
+        <label for="wordreview" class="ml-4"
           >Select a sentence to review words for that sentence:</label
         >
-        <select v-model="selectSentence" id="editSentence" class="ml-2">
+        <select v-model="selectSentence" id="wordreview" class="ml-2">
           <option
             v-for="sentence in sentences"
             :sentence="sentence"
@@ -91,6 +91,69 @@
         </div>
       </div>
     </div>
+    <hr class="divider" />
+    <!--begin sentence review-->
+    <h2 class="ml-4">Sentences</h2>
+    <div>
+      <form>
+        <label for="sentencereview" class="ml-4"
+          >Select a word to review sentences for that word:</label
+        >
+        <select v-model="selectWord" id="sentencereview" class="ml-2">
+          <option
+            v-for="word in words"
+            :word="word"
+            :key="word.id"
+            :value="word"
+          >
+            {{ word.name }}
+          </option>
+        </select>
+      </form>
+    </div>
+    <div class="row justify-content-center">
+      <h5 v-if="selectWord" class="card p-2 mt-2">
+        {{ selectWord.name }}
+      </h5>
+      <h5 v-else></h5>
+    </div>
+    <div class="row justify-content-center">
+      <button
+        v-if="showSnts"
+        @click="clearSentences()"
+        type="button"
+        class="row btn btn-xs border rounded btn-dark mt-2 ml-3"
+        style="max-height: 2rem"
+      >
+        hide sentences
+      </button>
+      <button
+        v-else
+        @click="showSentences()"
+        type="button"
+        class="row btn btn-xs border rounded btn-dark mt-2 ml-3"
+        style="max-height: 2rem"
+      >
+        show sentences
+      </button>
+    </div>
+    <div class="row justify-content-center">
+      <div v-show="showSnts" class="card justify-content-center m-5 p-4">
+        <div class="col">
+          <div
+            class="row m-4 p-4 card"
+            v-for="sentenceitem in sentenceitems"
+            :sentenceitem="sentenceitem"
+            :key="sentenceitem.sentenceWordId"
+          >
+            <div>
+              <h5 class="mr-2">sentence:</h5>
+              <p>{{ sentenceitem.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -100,7 +163,6 @@ export default {
   mounted() {
     this.$store.dispatch("getWords");
     this.$store.dispatch("getSentences");
-    this.$store.dispatch("getSentencewords");
   },
   data() {
     return {
@@ -108,6 +170,7 @@ export default {
       selectWord: 0,
       showdefinition: false,
       showWrds: false,
+      showSnts: false,
     };
   },
   watch: {
@@ -142,9 +205,6 @@ export default {
     worditems() {
       return this.$store.state.sentwords;
     },
-    sentencewords() {
-      return this.$store.state.sentencewords;
-    },
   },
   methods: {
     logout() {
@@ -153,6 +213,10 @@ export default {
     showWords() {
       this.showWrds = true;
       this.$store.dispatch("getWordsBySentence", this.selectSentence.id);
+    },
+    showSentences() {
+      this.showSnts = true;
+      this.$store.dispatch("getSentencesByWord", this.selectWord.id);
     },
     showDef() {
       this.showdefinition = true;
@@ -163,7 +227,9 @@ export default {
     clearWords() {
       this.showWrds = false;
     },
-    clearSentences() {},
+    clearSentences() {
+      this.showSnts = false;
+    },
   },
 };
 </script>

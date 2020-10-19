@@ -22,7 +22,7 @@
             <input
               type="submit"
               value="ADD SENTENCE"
-              class="btn border btn-danger rounded"
+              class="btn border btn-danger rounded col-11 col-md-12"
               style="max-height: 2rem; width: 92vw"
             />
           </div>
@@ -38,7 +38,7 @@
           id="wordname"
           name="wordname"
           v-model="newWord.name"
-          class="my-3 mx-2 rounded"
+          class="col-9 col-md-12 my-3 mx-2 rounded"
           style="width: 89vw"
         /><br />
         <label for="worddef">definition:</label>
@@ -47,7 +47,7 @@
           id="worddef"
           name="worddef"
           v-model="newWord.definition"
-          class="my-3 mx-2 rounded"
+          class="col-10 col-md-12 my-3 mx-2 rounded"
           style="width: 87vw"
         /><br />
         <label for="wordimage">image URL:</label>
@@ -56,7 +56,7 @@
           id="wordimage"
           name="wordimage"
           v-model="newWord.img"
-          class="my-3 mx-2 rounded"
+          class="col-10 col-md-12 my-3 mx-2 rounded"
           style="width: 86vw"
         /><br />
         <div class="col">
@@ -64,7 +64,7 @@
             <input
               type="submit"
               value="ADD WORD"
-              class="btn border btn-danger rounded"
+              class="col-10 col-md-12 btn border btn-danger rounded"
               style="max-height: 2rem; width: 92vw"
             />
           </div>
