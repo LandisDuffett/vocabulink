@@ -22,8 +22,6 @@ export default new Vuex.Store({
     sentencewords: [],
     wordsents: [],
     sentwords: [],
-    sentenceindex: 0,
-    wordindex: 0
   },
   mutations: {
     setSentences(state, sentences) {
@@ -41,12 +39,6 @@ export default new Vuex.Store({
     setSentwords(state, sentwords) {
       state.sentwords = sentwords
     },
-    setSentenceindex(state, sentenceindex) {
-      state.sentenceindex = sentenceindex
-    },
-    setWordindex(state, wordindex) {
-      state.wordindex = wordindex
-    }
   },
   actions: {
     setBearer({ }, bearer) {
@@ -105,22 +97,6 @@ export default new Vuex.Store({
     },
     async editSentence({ dispatch }, data) {
       await api.put("sentences/" + data.id, data).then(res => dispatch('getSentences'))
-    },
-    advance({ commit, state }) {
-      let ind = state.sentenceindex + 1;
-      commit('setSentenceindex', ind)
-    },
-    reset({ commit, state }) {
-      let ind = 0;
-      commit('setSentenceindex', ind)
-    },
-    advanceWord({ commit, state }) {
-      let ind = state.wordindex + 1;
-      commit('setWordindex', ind)
-    },
-    resetWord({ commit, state }) {
-      let ind = 0;
-      commit('setWordindex', ind)
     },
   }
 })

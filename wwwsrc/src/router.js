@@ -5,7 +5,7 @@ import Home from "./views/Home.vue";
 // @ts-ignore
 import Create from "./views/Create.vue";
 import Manage from "./views/Manage.vue";
-import Wordquiz from "./views/Wordquiz.vue";
+import Review from "./views/Review.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -30,9 +30,9 @@ export default new Router({
       beforeEnter: authGuard
     },
     {
-      path: "/wordquiz",
-      name: "wordquiz",
-      component: Wordquiz,
+      path: "/review",
+      name: "review",
+      component: Review,
       beforeEnter: authGuard
     }
   ]
