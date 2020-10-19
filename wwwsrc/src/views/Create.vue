@@ -173,8 +173,8 @@ export default {
     addSentence() {
       this.$store.dispatch("addSentence", this.newSentence);
     },
-    addLink() {
-      this.$store.dispatch("addSentenceword", {
+    async addLink() {
+      await this.$store.dispatch("addSentenceword", {
         wordId: this.selectWord,
         sentenceId: this.selectSentence,
       });

@@ -138,6 +138,8 @@
 export default {
   name: "practice",
   mounted() {
+    this.$store.dispatch("reset");
+    this.$store.dispatch("resetWord");
     this.$store.dispatch("getWords");
     this.$store.dispatch("getSentences");
     this.$store.dispatch("getSentencewords");
