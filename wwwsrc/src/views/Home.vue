@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="row justify-content-center mb-5">
-      <div id="create" class="col-12 mb-3">
+      <div id="manage" class="col-12 mb-3">
         <h2>2. The Manage page</h2>
       </div>
       <div>
@@ -79,7 +79,7 @@
       </div>
     </div>
     <div class="row justify-content-center mb-5">
-      <div id="create" class="col-12 mb-3">
+      <div id="review" class="col-12 mb-3">
         <h2>3. The Review page</h2>
       </div>
       <div>
