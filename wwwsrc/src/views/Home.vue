@@ -110,12 +110,14 @@ export default {
   computed: {},
   methods: {
     async login() {
-      await this.$auth.loginWithPopup();
-      this.$store.dispatch("setBearer", this.$auth.bearer);
-      this.$store.dispatch("getProfile");
-      console.log("this.$auth.user: ");
-      console.log(this.$auth.user);
-      this.$router.push({ name: "create", path: "/create" });
+      if (this.$auth.user == null) {
+        await this.$auth.loginWithPopup();
+        this.$store.dispatch("setBearer", this.$auth.bearer);
+        this.$store.dispatch("getProfile");
+        console.log("this.$auth.user: ");
+        console.log(this.$auth.user);
+        this.$router.push({ name: "create", path: "/create" });
+      }
     },
   },
   components: {},
